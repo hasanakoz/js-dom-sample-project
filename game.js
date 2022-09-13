@@ -59,5 +59,11 @@ document.querySelector(".check-btn").addEventListener("click", () => {
   });
 });
 
+document.querySelector(".guess-input").addEventListener("keydown", (e) => {
+  if (e.code === "Enter") {
+    document.querySelector(".check-btn").click();
+  }
+});
+
 // myObj = {a:1, b:2, c:3}
 // localStorage.setItem("OBJ", JSON.stringify(myObj)) //local storage a object atma
