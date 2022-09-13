@@ -9,7 +9,7 @@ console.log(randomNumber);
 
 let score = 10;
 let topScore = localStorage.getItem("topScore") || 0;
-
+document.querySelector(".top-score").textContent = topScore;
 //? CheckBtn basıldığında kontrol et
 document.querySelector(".check-btn").addEventListener("click", () => {
   const guessInput = Number(document.querySelector(".guess-input").value);
@@ -24,7 +24,7 @@ document.querySelector(".check-btn").addEventListener("click", () => {
       ".msg"
     ).innerHTML = `Congrats, you win <i class="fa-solid fa-face-grin-hearts fa-3x"></i>`;
     body.className = "bg-success";
-    if (score > topScore) {
+    if (score >= topScore) {
       //   topScore = score;
       localStorage.setItem("topScore", score);
       document.querySelector(".top-score").textContent = topScore;
