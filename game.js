@@ -4,7 +4,7 @@
 //*======================================
 
 //? 1-100 arasında rastgele sayı tut
-const randomNumber = Math.floor(Math.random() * 100 + 1);
+let randomNumber = Math.floor(Math.random() * 100 + 1);
 console.log(randomNumber);
 
 let score = 10;
@@ -14,6 +14,7 @@ let topScore = 0;
 document.querySelector(".check-btn").addEventListener("click", () => {
   const guessInput = Number(document.querySelector(".guess-input").value);
   const msg = document.querySelector(".msg");
+  const body = document.querySelector("body");
 
   //? input girilmediyse uyarı ver
   if (!guessInput) {
@@ -22,12 +23,12 @@ document.querySelector(".check-btn").addEventListener("click", () => {
     document.querySelector(
       ".msg"
     ).innerHTML = `Congrats, you win <i class="fa-solid fa-face-grin-hearts fa-3x"></i>`;
-    document.querySelector("body").style.background = "green";
+    body.className = "bg-success";
     if (score > topScore) {
       topScore = score;
       document.querySelector(".top-score").textContent = topScore;
-      document.querySelector(".secret-number").textContent = randomNumber;
     }
+    document.querySelector(".secret-number").textContent = randomNumber;
   } else {
     score -= 1;
 
@@ -38,10 +39,23 @@ document.querySelector(".check-btn").addEventListener("click", () => {
     } else {
       msg.innerHTML = "You lost ";
       document.querySelector(".check-btn").disabled = true;
-      document.querySelector("body").style.background = "red";
+      body.className = "bg-danger";
+      document.querySelector(".secret-number").textContent = randomNumber;
     }
     document.querySelector(".score").textContent = score;
   }
+
+  document.querySelector(".again-btn").addEventListener("click", () => {
+    score = 10;
+    document.querySelector(".score").textContent = score;
+    randomNumber = Math.floor(Math.random() * 100 + 1);
+    document.querySelector(".secret-number").textContent = "?";
+    console.log(randomNumber);
+    document.querySelector(".check-btn").disabled = false;
+    document.querySelector("body").classList.remove("bg-success", "bg-danger");
+    document.querySelector(".guess-input").value = "";
+    document.querySelector(".msg").innerText = "Starting ...";
+  });
 });
 
 //?random == input.value
