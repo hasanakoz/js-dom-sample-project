@@ -8,7 +8,7 @@ let randomNumber = Math.floor(Math.random() * 100 + 1);
 console.log(randomNumber);
 
 let score = 10;
-let topScore = 0;
+let topScore = localStorage.getItem("topScore") || 0;
 
 //? CheckBtn basıldığında kontrol et
 document.querySelector(".check-btn").addEventListener("click", () => {
@@ -25,7 +25,8 @@ document.querySelector(".check-btn").addEventListener("click", () => {
     ).innerHTML = `Congrats, you win <i class="fa-solid fa-face-grin-hearts fa-3x"></i>`;
     body.className = "bg-success";
     if (score > topScore) {
-      topScore = score;
+      //   topScore = score;
+      localStorage.setItem("topScore", score);
       document.querySelector(".top-score").textContent = topScore;
     }
     document.querySelector(".secret-number").textContent = randomNumber;
@@ -58,8 +59,5 @@ document.querySelector(".check-btn").addEventListener("click", () => {
   });
 });
 
-//?random == input.value
-//?tebrikler bildiniz
-//?background = green
-//?score > top score ; topScore = score
-//?secretNumber =  görünür
+// myObj = {a:1, b:2, c:3}
+// localStorage.setItem("OBJ", JSON.stringify(myObj)) //local storage a object atma
